@@ -1,0 +1,121 @@
+/* Import a handwritten font for that "annotated" look */
+@import url('https://fonts.googleapis.com/css2?family=Gloria+Hallelujah&family=Inter:wght@400;800&display=swap');
+
+:root {
+  --bg-color: #e0e5ec;        /* Neutral textured-feel background */
+  --card-bg: #ffffff;         /* Photo paper white */
+  --text-main: #2d3748;
+  --pin-shadow: 0 10px 20px rgba(0,0,0,0.15), 0 6px 6px rgba(0,0,0,0.1);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background-color: var(--bg-color);
+  /* Subtle dot pattern to make it look like a board/wall */
+  background-image: radial-gradient(#bdc3c7 1px, transparent 1px);
+  background-size: 20px 20px; 
+  font-family: 'Inter', sans-serif;
+  color: var(--text-main);
+  margin: 0;
+  padding: 0;
+}
+
+/* Title Styling */
+.mood-board-heading {
+  text-align: center;
+  font-family: 'Gloria Hallelujah', cursive; /* Handwritten style */
+  font-size: 3.5rem;
+  color: #333;
+  margin: 50px 0 40px;
+  text-shadow: 2px 2px 0px rgba(255,255,255,0.5);
+  transform: rotate(-2deg); /* Playful tilt */
+}
+
+/* KEY CHANGE: Masonry Layout 
+   Instead of 'display: grid', we use columns.
+   This allows items to stack naturally like Pinterest.
+*/
+.mood-board {
+  column-count: 3; /* Default to 3 columns */
+  column-gap: 20px;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+/* The "Polaroid" Card Styling */
+.mood-board-item {
+  background-color: var(--card-bg);
+  display: inline-block; /* Essential for column layout to work */
+  width: 100%;
+  margin-bottom: 30px; /* Space between vertical items */
+  padding: 15px 15px 50px 15px; /* Extra bottom padding for the "Polaroid" text area */
+  border-radius: 2px; /* Sharp corners like real photos */
+  box-shadow: var(--pin-shadow);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  position: relative;
+  
+  /* Prevent the item from breaking across columns */
+  break-inside: avoid; 
+}
+
+/* ORGANIC FEEL: Random Rotations 
+   This makes the items look like they were thrown onto a table
+*/
+.mood-board-item:nth-child(odd) {
+  transform: rotate(2deg);
+}
+
+.mood-board-item:nth-child(even) {
+  transform: rotate(-1.5deg);
+}
+
+.mood-board-item:nth-child(3n) {
+  transform: rotate(1deg);
+}
+
+/* Hover Effect: Lift and Straighten */
+.mood-board-item:hover {
+  transform: scale(1.03) rotate(0deg) !important; /* Reset rotation on hover */
+  box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+  z-index: 10; /* Bring to front */
+}
+
+/* Image Styling */
+.mood-board-image {
+  width: 100%;
+  height: auto; /* Let image determine height for variety */
+  min-height: 200px;
+  object-fit: cover;
+  border: 1px solid #eee; /* Subtle inner border */
+  filter: contrast(1.1) saturate(1.1); /* Make photos pop slightly */
+}
+
+/* Text Styling - Looks like handwritten marker */
+.mood-board-text {
+  position: absolute;
+  bottom: 10px;
+  left: 0;
+  width: 100%;
+  text-align: center;
+  font-family: 'Gloria Hallelujah', cursive;
+  color: #555;
+  font-size: 1.2rem;
+  margin: 0;
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 900px) {
+  .mood-board {
+    column-count: 2;
+  }
+}
+
+@media (max-width: 600px) {
+  .mood-board {
+    column-count: 1;
+  }
+}
